@@ -31,7 +31,11 @@
 }
 
 .fa-bookmark:hover{
-	color: rgb(230, 230, 19);
+	color: rgb(19, 146, 230);
+}
+
+.recipe-list-item.favourite .fa-bookmark{
+	color: rgb(19, 146, 230);
 }
 
 .fa-bookmark:hover::after { 

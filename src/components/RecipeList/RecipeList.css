@@ -1,0 +1,12 @@
+.recipe-list{
+	margin-bottom: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 0;
+}
+
+img{
+	object-fit: cover;
+    object-position: 50% 50%;
+}

@@ -1,0 +1,10 @@
+.recipe-add-form{
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	margin-bottom: 100px;
+}
+
+h4, form, .form-control{
+	margin-bottom: 20px;
+}

@@ -1,5 +1,5 @@
-import './RecipeAddForm.css'
 import { Component } from 'react'
+import './RecipeAddForm.css'
 
 class RecipeAddForm extends Component {
 	constructor(props) {
@@ -7,6 +7,7 @@ class RecipeAddForm extends Component {
 		this.state = {
 			title: '',
 			ingridients: '',
+			isHidden: true
 		}
 	}
 
@@ -18,17 +19,26 @@ class RecipeAddForm extends Component {
 
 	onAdd = e => {
 		e.preventDefault()
-		this.props.addNewRecipe(this.state.title, this.state.ingridients)
-		//clean form
-		this.setState({
-			title: '',
-			ingridients: '',
-		})
+		if (this.state.title.length > 5 && this.state.ingridients.length > 15) {
+			this.props.addNewRecipe(this.state.title, this.state.ingridients)
+			//clean form
+			this.setState({
+				title: '',
+				ingridients: '',
+			})
+		} else {
+			this.setState({
+				// ...this.state,
+				isHidden: false
+			})
+			console.log('error');
+		}
+
+
 	}
 
 	render() {
 		const { title, ingridients, } = this.state
-		// const { addNewRecipe } = this.props
 
 		return (
 			<div className='recipe-add-form'>
@@ -42,6 +52,7 @@ class RecipeAddForm extends Component {
 						value={title}
 						onChange={this.onInputChanged}
 					/>
+					<span className='warning hidden'>Название не может быть менее 5 символов</span>
 					<textarea
 						name="ingridients"
 						className="form-control"
@@ -49,6 +60,12 @@ class RecipeAddForm extends Component {
 						value={ingridients}
 						onChange={this.onInputChanged}>
 					</textarea>
+					<span
+						className={`warning ${this.props.isHidden ? '' : 'hidden'}`}
+					// isHidden={this.state.isHidden}
+					// className='warning hidden'
+					>
+						Это поле не может содержать менее 10 символов</span>
 					<button
 						className="btn btn-primary"
 						type="submit"

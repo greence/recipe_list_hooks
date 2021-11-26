@@ -1,10 +1,10 @@
 import { Component } from 'react'
-import './App.css'
 import Header from './components/Header/Header'
 import Search from './components/Search/Search'
 import Filter from './components/Filter/Filter'
 import RecipeAddForm from './components/RecipeAddForm/RecipeAddForm'
 import RecipeList from './components/RecipeList/RecipeList'
+import './App.css'
 
 class App extends Component {
 
@@ -18,7 +18,7 @@ class App extends Component {
           time: '45 мин',
           img: '',
           label: '',
-          favorite: false,
+          favourite: false,
           id: 456
         },
         {
@@ -27,7 +27,7 @@ class App extends Component {
           time: '60 мин',
           img: '',
           label: '',
-          favorite: false,
+          favourite: false,
           id: 458
         },
         {
@@ -36,11 +36,26 @@ class App extends Component {
           time: '50 мин',
           img: '',
           label: '',
-          favorite: false,
+          favourite: false,
           id: 569
         }
-      ]
+      ],
+      searchInput: '',
     }
+  }
+
+  addToFavourite = id => {
+    this.setState(({ data }) => ({
+      data: data.map(item => {
+        if (item.id === id) {
+          return {
+            ...item,
+            favourite: !item.favourite
+          }
+        }
+        return item
+      })
+    }))
   }
 
   deleteRecipe = id => {
@@ -56,11 +71,11 @@ class App extends Component {
     const newRecipe = {
       title,
       ingridients,
+      id: this.generateId(),
+      favourite: false,
       time: '',
       img: '',
       label: '',
-      favorite: false,
-      id: this.generateId()
     }
 
     let newData = [...this.state.data, newRecipe]
@@ -69,13 +84,34 @@ class App extends Component {
     })
   }
 
+  searchRecipe = (recipesList, searchRequest) => {
+    if (searchRequest.length === 0) {
+      return recipesList
+    }
+    return recipesList.filter(recipe => {
+      // return recipe.title.indexOf(searchRequest) > -1
+      return recipe.title.toLowerCase().includes(searchRequest.toLowerCase())
+    })
+  }
+
+  onSearchInput = inputValue => {
+    this.setState({
+      searchInput: inputValue
+    })
+  }
+
   render() {
+    const { data, searchInput } = this.state
+    const filteredRecipes = this.searchRecipe(data, searchInput)
     return (
       <div className="App">
-        <Header />
-        <Search />
+        <Header data={data} />
+        <Search onSearchInput={this.onSearchInput} />
         <Filter />
-        <RecipeList data={this.state.data} deleteRecipe={id => this.deleteRecipe(id)} />
+        <RecipeList
+          data={filteredRecipes}
+          deleteRecipe={id => this.deleteRecipe(id)}
+          addToFavourite={this.addToFavourite} />
         <RecipeAddForm addNewRecipe={this.addNewRecipe} />
       </div>
     )

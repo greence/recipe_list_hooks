@@ -2,7 +2,7 @@ import './RecipeList.css'
 import RecipeListItem from '../RecipeListItem/RecipeListItem'
 
 
-const RecipeList = ({ data, deleteRecipe }) => {
+const RecipeList = ({ data, deleteRecipe, addToFavourite }) => {
 
 	const list = data.map(recipe => {
 		const { id, ...recipeProps } = recipe
@@ -12,9 +12,11 @@ const RecipeList = ({ data, deleteRecipe }) => {
 				key={recipe.id}
 				{...recipeProps}
 				deleteRecipe={() => { deleteRecipe(id) }}
+				addToFavourite={() => addToFavourite(id)}
 			/>
 		)
 	})
+
 	return (
 		<ul className='recipe-list'>
 			{list}

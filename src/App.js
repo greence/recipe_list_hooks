@@ -7,7 +7,6 @@ import RecipeList from './components/RecipeList/RecipeList'
 import './App.css'
 
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +16,7 @@ class App extends Component {
           ingridients: ['молоко', 'вода', 'масло сливочное', 'мука', 'соль', ' сахар', 'дрожжи сухие', 'яйца'],
           time: '45 мин',
           img: '',
-          label: '',
+          new: true,
           favourite: false,
           id: 456
         },
@@ -41,6 +40,7 @@ class App extends Component {
         }
       ],
       searchInput: '',
+      filter: 'all'
     }
   }
 
@@ -100,14 +100,29 @@ class App extends Component {
     })
   }
 
+  filterRecipes = (recipes, filterOption) => {
+    switch (filterOption) {
+      case 'favourite':
+        return recipes.filter(recipe => recipe.favourite)
+      case 'new': {
+        return recipes.filter(recipe => recipe.new)
+      }
+      default: return recipes
+    }
+  }
+
+  onFilterSelect = filter => {
+    this.setState({ filter })
+  }
+
   render() {
-    const { data, searchInput } = this.state
-    const filteredRecipes = this.searchRecipe(data, searchInput)
+    const { data, searchInput, filter } = this.state
+    const filteredRecipes = this.filterRecipes(this.searchRecipe(data, searchInput), filter)
     return (
       <div className="App">
         <Header data={data} />
         <Search onSearchInput={this.onSearchInput} />
-        <Filter />
+        <Filter filter={filter} onFilterSelect={this.onFilterSelect} />
         <RecipeList
           data={filteredRecipes}
           deleteRecipe={id => this.deleteRecipe(id)}

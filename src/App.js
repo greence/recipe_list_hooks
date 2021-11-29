@@ -89,43 +89,44 @@ class App extends Component {
       return recipesList
     }
     return recipesList.filter(recipe => {
-      // return recipe.title.indexOf(searchRequest) > -1
       return recipe.title.toLowerCase().includes(searchRequest.toLowerCase())
     })
   }
 
-  onSearchInput = inputValue => {
+  onSearchInputChange = inputValue => {
     this.setState({
       searchInput: inputValue
     })
   }
 
-  filterRecipes = (recipes, filterOption) => {
-    switch (filterOption) {
+  //Фильтр рецептов по кнопкам
+  filterRecipes = (recipesList, filter) => {
+    switch (filter) {
       case 'favourite':
-        return recipes.filter(recipe => recipe.favourite)
-      case 'new': {
-        return recipes.filter(recipe => recipe.new)
-      }
-      default: return recipes
+        return recipesList.filter(recipe => recipe.favourite);
+      case 'new':
+        return recipesList.filter(recipe => recipe.new);
+      default:
+        return recipesList
     }
   }
 
-  onFilterSelect = filter => {
+  onFilterChange = filter => {
     this.setState({ filter })
   }
 
   render() {
     const { data, searchInput, filter } = this.state
     const filteredRecipes = this.filterRecipes(this.searchRecipe(data, searchInput), filter)
+
     return (
       <div className="App">
         <Header data={data} />
-        <Search onSearchInput={this.onSearchInput} />
-        <Filter filter={filter} onFilterSelect={this.onFilterSelect} />
+        <Search onSearchInputChange={this.onSearchInputChange} />
+        <Filter filter={filter} onFilterChange={this.onFilterChange} />
         <RecipeList
           data={filteredRecipes}
-          deleteRecipe={id => this.deleteRecipe(id)}
+          deleteRecipe={this.deleteRecipe}
           addToFavourite={this.addToFavourite} />
         <RecipeAddForm addNewRecipe={this.addNewRecipe} />
       </div>

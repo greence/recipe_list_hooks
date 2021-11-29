@@ -1,8 +1,4 @@
-.App {
-  margin: 0 auto;
-  /* text-align: center; */
-  max-width: 1000px;
-}
+
 
 *{
 	padding: 0;
@@ -39,3 +35,8 @@ a:hover{text-decoration: none;}
 ul li{list-style: none;}
 img{vertical-align: top;}
 
+.App {
+	margin: 0 auto;
+	max-width: 1000px;
+	padding-bottom: 20px;
+}

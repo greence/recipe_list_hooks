@@ -10,18 +10,23 @@ class Search extends Component {
 	}
 
 	onInputChange = e => {
-		let value = e.target.value
+		let inputValue = e.target.value
 		this.setState({
-			searchRequest: value
+			searchRequest: inputValue
 		})
-		this.props.onSearchInput(value)
+		this.props.onSearchInputChange(inputValue)
 	}
 
 	render() {
 		return (
 			<div className='search'>
 				<h2>Search</h2>
-				<input type="text" className='form-control' placeholder='Искать рецепт' onChange={this.onInputChange} />
+				<input
+					type="text"
+					className='form-control'
+					placeholder='Искать рецепт'
+					value={this.state.searchRequest}
+					onChange={this.onInputChange} />
 			</div>
 		)
 	}

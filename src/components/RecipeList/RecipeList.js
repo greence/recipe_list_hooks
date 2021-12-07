@@ -1,27 +1,39 @@
-import './RecipeList.css'
 import RecipeListItem from '../RecipeListItem/RecipeListItem'
+import { Component } from 'react'
+import RecipeService from '../../services/RecipeService'
+import './RecipeList.scss'
 
+class RecipeList extends Component {
+	state = {
+		recipeList: []
+	}
+	RecipeService = new RecipeService()
+	createRecipesList = async () => {
+		return await this.RecipeService
+			.getAllRecipes()
+			.then(res => this.setState({ recipeList: res }))
+	}
 
-const RecipeList = ({ data, deleteRecipe, addToFavourite }) => {
+	componentDidMount() {
+		this.createRecipesList()
+	}
 
-	const list = data.map(recipe => {
-		const { id, ...recipeProps } = recipe
-		return (
-			// <RecipeListItem key={recipe.title} title={recipe.title} ingridients={recipe.ingridients} />
+	render() {
+		const list = this.state.recipeList.map(recipe =>
 			<RecipeListItem
-				key={recipe.id}
-				{...recipeProps}
-				deleteRecipe={() => { deleteRecipe(id) }}
-				addToFavourite={() => addToFavourite(id)}
-			/>
-		)
-	})
+				key={recipe.homepage}
+				name={recipe.name}
+				thumbnail={recipe.thumbnail}
+				time={recipe.time}
+				homepage={recipe.homepage}
+			/>)
 
-	return (
-		<ul className='recipe-list'>
-			{list}
-		</ul>
-	)
+		return (
+			<ul className='recipe-list'>
+				{list}
+			</ul>
+		)
+	}
 }
 
 export default RecipeList

@@ -1,4 +1,4 @@
-import './Filter.css'
+import './Filter.scss'
 
 const Filter = props => {
 	const filterButtons = [
@@ -19,7 +19,7 @@ const Filter = props => {
 
 
 	return (
-		<div className='filter'>
+		<div className='filter mb-2'>
 			{buttons}
 			{/* <button type='button' className="btn btn-primary">Все</button>
 			<button type='button' className="btn btn-dark">Новые</button>

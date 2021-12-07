@@ -1,0 +1,21 @@
+.recipe-list-item{
+	padding-bottom: 20px;
+	display: flex;
+	align-items: stretch;
+}
+
+.card-body{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.card-description{
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 15px;
+}
+
+.card-bottom{
+	align-self: flex-start;
+}

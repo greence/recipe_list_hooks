@@ -1,0 +1,16 @@
+li{list-style: none;}
+.container{
+	display: flex;
+	justify-content:space-evenly;
+}
+
+.right-column{
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-self: center;
+}
+
+.btn{
+	margin: 0 auto;
+}

@@ -1,13 +1,10 @@
-import './Header.css'
+import './Header.scss'
 
-const Header = props => {
-	const favourite = props.data.filter(recipe => recipe.favourite).length
+const Header = () => {
 	return (
-		<div className='header'>
+		<header className='header mb-4'>
 			<h1>Каталог рецептов</h1>
-			<div>Всего рецептов: <b>{props.data.length}</b></div>
-			<div>Избранные: <b>{favourite}</b></div>
-		</div>
+		</header>
 	)
 }
 

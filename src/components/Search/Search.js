@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import './Search.css'
+import './Search.scss'
 
 class Search extends Component {
 	constructor(props) {
@@ -19,8 +19,8 @@ class Search extends Component {
 
 	render() {
 		return (
-			<div className='search'>
-				<h2>Search</h2>
+			<div className='search mb-5'>
+				<h2 className='mb-2'>Search</h2>
 				<input
 					type="text"
 					className='form-control'

@@ -21,9 +21,7 @@ const Filter = props => {
 	return (
 		<div className='filter mb-2'>
 			{buttons}
-			{/* <button type='button' className="btn btn-primary">Все</button>
-			<button type='button' className="btn btn-dark">Новые</button>
-			<button type='button' className="btn btn-dark">Избранные</button> */}
+			<p>Реализовать фильтр по предлодженным тегам, заменить кнопки на линки с тегами под инпутом</p>
 		</div>
 	)
 }

@@ -2,8 +2,12 @@ li{list-style: none;}
 .container{
 	display: flex;
 	justify-content:space-evenly;
+	height: 500px;
 }
-
+.left-column{
+	width: 310px;
+	align-self: center;
+}
 .right-column{
 	display: flex;
 	flex-wrap: wrap;

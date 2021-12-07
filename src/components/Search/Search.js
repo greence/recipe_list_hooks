@@ -21,6 +21,7 @@ class Search extends Component {
 		return (
 			<div className='search mb-5'>
 				<h2 className='mb-2'>Search</h2>
+				<p>Реализовать поиск по запросу</p>
 				<input
 					type="text"
 					className='form-control'

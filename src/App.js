@@ -8,44 +8,6 @@ import './App.scss'
 
 const App = () => {
 
-  // generateId = () => {
-  //   return Math.floor(Math.random() * 10000)
-  // }
-
-  // searchRecipe = (recipesList, searchRequest) => {
-  //   if (searchRequest.length === 0) {
-  //     return recipesList
-  //   }
-  //   return recipesList.filter(recipe => {
-  //     return recipe.title.toLowerCase().includes(searchRequest.toLowerCase())
-  //   })
-  // }
-
-  // onSearchInputChange = inputValue => {
-  //   this.setState({
-  //     searchInput: inputValue
-  //   })
-  // }
-
-  //Фильтр рецептов по кнопкам
-  // filterRecipes = (recipesList, filter) => {
-  //   switch (filter) {
-  //     case 'favourite':
-  //       return recipesList.filter(recipe => recipe.favourite);
-  //     case 'new':
-  //       return recipesList.filter(recipe => recipe.new);
-  //     default:
-  //       return recipesList
-  //   }
-  // }
-
-  // onFilterChange = filter => {
-  //   this.setState({ filter })
-  // }
-
-
-  // const filteredRecipes = this.filterRecipes(this.searchRecipe(data, searchInput), filter)
-
   return (
     <div className="App">
       <Header />

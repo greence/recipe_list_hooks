@@ -1,4 +1,4 @@
-import { Component } from "react"
+import { useState, useEffect } from "react"
 import RecipeService from "../../services/RecipeService"
 import RecipeListItem from "../RecipeListItem/RecipeListItem"
 import Spinner from "../Spinner/Spinner"
@@ -8,77 +8,65 @@ import id from "../../id.json"
 import './RandomRecipe.scss'
 
 
-class RandomRecipe extends Component {
-	state = {
-		recipe: {},
-		loading: true,
-		error: false
-	}
+const RandomRecipe = () => {
+	const [recipe, setRecipe] = useState({})
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
 
-	getRandomId = () => {
+	const getRandomId = () => {
 		return id[Math.floor(Math.random() * id.length)]
 	}
 
-	recipeService = new RecipeService()
-	updateNewRecipe = () => {
-		this.setState({ recipe: {}, loading: true })
-		this.recipeService
-			.getRecipe(this.getRandomId())
-			.then(this.onLoadingRecipe)
-			.catch(this.onError)
+	const recipeService = new RecipeService()
+	const updateNewRecipe = () => {
+		setRecipe({})
+		setLoading(true)
+		recipeService.getRecipe(getRandomId())
+			.then(onLoadingRecipe)
+			.catch(onError)
 	}
 
-	onLoadingRecipe = recipe => {
-		this.setState({
-			recipe,
-			loading: false
-		})
+	const onLoadingRecipe = recipe => {
+		setRecipe(recipe)
+		setLoading(false)
 	}
 
-	onError = () => {
-		this.setState({
-			loading: false,
-			error: true
-		})
+	const onError = () => {
+		setLoading(false)
+		setError(true)
 	}
 
+	useEffect(() => {
+		updateNewRecipe()
+	}, [])
 
-	componentDidMount() {
-		this.updateNewRecipe()
-	}
+	const spinner = loading ? <Spinner /> : null
+	const error404 = error ? <Page404 /> : null
+	const showRecipe = !(loading || error)
+		? <RecipeListItem
+			key={recipe.homepage}
+			name={recipe.name}
+			thumbnail={recipe.thumbnail}
+			time={recipe.time}
+			homepage={recipe.homepage}
+		/>
+		: null
 
-	render() {
-		const { name, thumbnail, time, homepage } = this.state.recipe
-		const { loading, error } = this.state
-		const spinner = loading ? <Spinner /> : null
-		const error404 = error ? <Page404 /> : null
-		const recipe = !(loading || error)
-			? <RecipeListItem
-				key={homepage}
-				name={name}
-				thumbnail={thumbnail}
-				time={time}
-				homepage={homepage}
-			/>
-			: null
-
-		return (
-			<>
-
-				<div className="container">
-					<div className="left-column">
-						{spinner}
-						{recipe}
-						{error404}
-					</div>
-					<div className="right-column">
-						<p>Click the button to get a random recipe!</p>
-						<button className="btn btn-primary" onClick={this.updateNewRecipe}>Get random recipe</button>
-					</div>
+	return (
+		<>
+			<div className="container">
+				<div className="left-column">
+					{spinner}
+					{showRecipe}
+					{error404}
 				</div>
-			</>
-		)
-	}
+				<div className="right-column">
+					<p>Click the button to get a random recipe!</p>
+					<button className="btn btn-primary" onClick={updateNewRecipe}>Get random recipe</button>
+				</div>
+			</div>
+		</>
+	)
 }
 
 export default RandomRecipe

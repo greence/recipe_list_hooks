@@ -1,5 +1,5 @@
 const _path = 'https://api.edamam.com/api/recipes/v2'
-const _apiKey = 'app_id=edeb9bdc&app_key=f0000630087b8d1ca9befc20cead5674'
+const _apiKey = 'app_id=edeb9bdc&app_key=f0000630087b8d1ca9befc20cead5674&random=true'
 const _type = 'type=public'
 
 class RecipeService {

@@ -25,7 +25,7 @@ class Search extends Component {
 				<input
 					type="text"
 					className='form-control'
-					placeholder='Искать рецепт'
+					placeholder='Enter the name of recipe...'
 					value={this.state.searchRequest}
 					onChange={this.onInputChange} />
 			</div>

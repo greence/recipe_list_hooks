@@ -9,21 +9,32 @@ class RecipeList extends Component {
 	state = {
 		recipeList: [],
 		loading: true,
-		error: false
+		error: false,
+		recipesEnded: false
 	}
+
+	componentDidMount() {
+		this.createRecipesList()
+	}
+
 	RecipeService = new RecipeService()
+
 	createRecipesList = async () => {
+		this.setState({ loading: true })
 		return await this.RecipeService
 			.getAllRecipes()
 			.then(this.onRecipesLoaded)
 			.catch(this.onError)
 	}
 
-	onRecipesLoaded = recipes => {
-		this.setState({
-			recipeList: recipes,
+	onRecipesLoaded = newRecipeList => {
+		if (newRecipeList.length < 20) {
+			this.setState({ recipesEnded: true })
+		}
+		this.setState(({ recipeList }) => ({
+			recipeList: [...recipeList, ...newRecipeList],
 			loading: false
-		})
+		}))
 	}
 
 	onError = () => {
@@ -33,12 +44,9 @@ class RecipeList extends Component {
 		})
 	}
 
-	componentDidMount() {
-		this.createRecipesList()
-	}
-
 	render() {
-		const { loading, error } = this.state
+		const { loading, error, recipesEnded } = this.state
+		// const btn = recipesEnded ? 'btn btn-primary disabled' : 'btn btn-primary'
 		const spinner = loading ? <Spinner /> : null
 		const page404 = error ? <Page404 /> : null
 		const list = this.state.recipeList.map(recipe =>
@@ -51,11 +59,21 @@ class RecipeList extends Component {
 			/>)
 
 		return (
-			<ul className='recipe-list'>
+			<>
+				<h2>Recipes list</h2>
+				<ul className='recipe-list'>
+					{page404}
+					{list}
+				</ul>
 				{spinner}
-				{page404}
-				{list}
-			</ul>
+				<div className="btn-load">
+					<button
+						type="button"
+						className="btn btn-primary"
+						style={{ display: recipesEnded ? 'none' : 'block' }}
+						onClick={this.createRecipesList}>Show more</button>
+				</div>
+			</>
 		)
 	}
 }

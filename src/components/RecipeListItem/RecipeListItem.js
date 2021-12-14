@@ -10,10 +10,10 @@ const RecipeListItem = props => {
 				<div className="card-body">
 					<div className="card-description">
 						<h5 className="card-title">{name}</h5>
-						<p className="card-text">Время приготовления {time} минут</p>
+						<p className="card-text">Cooking time {time} minutes</p>
 					</div>
 					<div className="card-bottom">
-						<a href={homepage} className="btn btn-primary _btn">Подробнее</a>
+						<a href={homepage} className="btn btn-primary _btn">See more</a>
 					</div>
 				</div>
 			</div>

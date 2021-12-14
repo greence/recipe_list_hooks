@@ -14,6 +14,8 @@ a:focus,a:active{outline: none;}
 nav,footer,header,aside{display: block;}
 
 html,body{
+	background: no-repeat url('./assets/photo-1549483532-d1945e6c48af\ копия.jpg');
+	backdrop-filter: blur(45px);
 	height: 100%;
 	width: 100%;
 	font-size: 100%;

@@ -1,30 +1,23 @@
-class RecipeService {
-	_path = 'https://api.edamam.com/api/recipes/v2'
-	_apiKey = 'app_id=edeb9bdc&app_key=f0000630087b8d1ca9befc20cead5674&random=true'
-	_type = 'type=public'
+import { useHttp } from "../hooks/http.hook"
 
+const useRecipeService = () => {
+	const { loading, requestData, error, clearError } = useHttp()
 
-	getData = async url => {
-		let res = await fetch(url)
+	const _path = 'https://api.edamam.com/api/recipes/v2'
+	const _apiKey = 'app_id=edeb9bdc&app_key=f0000630087b8d1ca9befc20cead5674&random=true'
+	const _type = 'type=public'
 
-		if (!res.ok) {
-			throw new Error(`Could not get data, status: ${res.status}`)
-		}
-
-		return await res.json()
+	const getAllRecipes = async () => {
+		const res = await requestData(`${_path}?${_type}&q=meat&${_apiKey}`)
+		return res.hits.map(({ recipe }) => _transformRecipe(recipe))
 	}
 
-	getAllRecipes = async () => {
-		const res = await this.getData(`${this._path}?${this._type}&q=meat&${this._apiKey}`)
-		return res.hits.map(({ recipe }) => this._transformRecipe(recipe))
+	const getRecipe = async (id) => {
+		const res = await requestData(`${_path}/${id}?${_type}&${_apiKey}`)
+		return _transformRecipe(res.recipe)
 	}
 
-	getRecipe = async (id) => {
-		const res = await this.getData(`${this._path}/${id}?${this._type}&${this._apiKey}`)
-		return this._transformRecipe(res.recipe)
-	}
-
-	_transformRecipe = recipe => {
+	const _transformRecipe = recipe => {
 		return {
 			name: recipe.label,
 			homepage: recipe.url,
@@ -32,6 +25,8 @@ class RecipeService {
 			time: recipe.totalTime,
 		}
 	}
+
+	return { loading, error, clearError, getAllRecipes, getRecipe }
 }
 
-export default RecipeService
+export default useRecipeService

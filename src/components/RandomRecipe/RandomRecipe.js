@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import RecipeService from "../../services/RecipeService"
+import useRecipeService from "../../services/RecipeService"
 import RecipeListItem from "../RecipeListItem/RecipeListItem"
 import Spinner from "../Spinner/Spinner"
 import Page404 from "../Page404/Page404"
@@ -10,30 +10,22 @@ import './RandomRecipe.scss'
 
 const RandomRecipe = () => {
 	const [recipe, setRecipe] = useState({})
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(false);
 
 	const getRandomId = () => {
 		return id[Math.floor(Math.random() * id.length)]
 	}
 
-	const recipeService = new RecipeService()
+	const { loading, error, clearError, getRecipe } = useRecipeService()
+
 	const updateNewRecipe = () => {
+		clearError()
 		setRecipe({})
-		setLoading(true)
-		recipeService.getRecipe(getRandomId())
+		getRecipe(getRandomId())
 			.then(onLoadingRecipe)
-			.catch(onError)
 	}
 
 	const onLoadingRecipe = recipe => {
 		setRecipe(recipe)
-		setLoading(false)
-	}
-
-	const onError = () => {
-		setLoading(false)
-		setError(true)
 	}
 
 	useEffect(() => {

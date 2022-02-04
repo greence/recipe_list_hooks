@@ -6,17 +6,18 @@ import useRecipeService from '../../services/RecipeService'
 import './RecipeList.scss'
 
 
-const RecipeList = () => {
+const RecipeList = props => {
 	const [recipeList, setRecipeList] = useState([])
 	const [recipesEnded, setRecipesEnded] = useState(false)
+	const [prevProps, setPrevProps] = useState()
 	const { loading, error, getAllRecipes } = useRecipeService()
 
 	useEffect(() => {
 		createRecipesList()
-	}, [])
+	}, [props])
 
 	const createRecipesList = () => {
-		getAllRecipes()
+		getAllRecipes(props.recipeType)
 			.then(onRecipesLoaded)
 	}
 
@@ -24,14 +25,19 @@ const RecipeList = () => {
 	const onRecipesLoaded = newRecipeList => {
 		if (newRecipeList.length < 20) {
 			setRecipesEnded(true)
+		} else if (prevProps === props.recipeType) {
+			setRecipeList(recipeList => [...recipeList, ...newRecipeList])
+
+		} else {
+			setRecipeList(newRecipeList)
 		}
-		setRecipeList(recipeList => [...recipeList, ...newRecipeList])
+		setPrevProps(props.recipeType)
 	}
 
 	// const btn = recipesEnded ? 'btn btn-primary disabled' : 'btn btn-primary'
 	const spinner = loading ? <Spinner /> : null
 	const page404 = error ? <Page404 /> : null
-	const list = !(loading || error)
+	const list = prevProps === props.recipeType
 		? recipeList.map(recipe =>
 			<RecipeListItem
 				key={recipe.homepage}
@@ -41,6 +47,7 @@ const RecipeList = () => {
 				homepage={recipe.homepage}
 			/>)
 		: null
+
 
 	return (
 		<>

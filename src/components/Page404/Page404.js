@@ -1,7 +1,10 @@
 import errorImg from '../../assets/3818850.jpg'
+import './Page404.scss'
 const Page404 = () => {
 	return (
-		<img style={{ margin: '0 auto', objectFit: 'cover', width: '310px' }} src={errorImg} alt="error-img" />
+		<div className="error-img">
+			<img src={errorImg} alt="error-img" />
+		</div>
 	)
 }
 

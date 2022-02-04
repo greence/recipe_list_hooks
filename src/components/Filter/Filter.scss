@@ -1,9 +1,15 @@
 .filter{
 	display: flex;
+	flex-direction: column;
 	justify-content: flex-start;
 }
 
 .btn{
 	width: 150px;
 	margin-right: 5px;
+}
+
+.filter-buttons{
+	display: flex;
+	flex-direction: row;
 }

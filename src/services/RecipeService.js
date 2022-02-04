@@ -7,8 +7,8 @@ const useRecipeService = () => {
 	const _apiKey = 'app_id=edeb9bdc&app_key=f0000630087b8d1ca9befc20cead5674&random=true'
 	const _type = 'type=public'
 
-	const getAllRecipes = async () => {
-		const res = await requestData(`${_path}?${_type}&q=meat&${_apiKey}`)
+	const getAllRecipes = async (param) => {
+		const res = await requestData(`${_path}?${_type}&q=${param}&${_apiKey}`)
 		return res.hits.map(({ recipe }) => _transformRecipe(recipe))
 	}
 

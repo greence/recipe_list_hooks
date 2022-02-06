@@ -5,21 +5,18 @@ const RecipeListItem = props => {
 
 	return (
 		<li className='recipe-list-item'>
-			<div className="card" style={{ width: '310px' }}>
-				<img src={thumbnail} alt="" />
+			<div className="card">
 				<div className="card-body">
+					<img src={thumbnail} alt={name} />
 					<div className="card-description">
-						<h5 className="card-title">{name}</h5>
-						<p className="card-text">Cooking time {time} minutes</p>
-					</div>
-					<div className="card-bottom">
-						<a href={homepage} className="btn btn-primary _btn">See more</a>
+						<span className="card-title">{name}</span>
+						<span className="card-text">Cooking time {time} minutes</span>
+						<a href={homepage}><button>See more</button></a>
 					</div>
 				</div>
 			</div>
 		</li>
 	)
-
 }
 
 export default RecipeListItem

@@ -49,9 +49,10 @@ const RecipeList = props => {
 		: null
 
 
+
+
 	return (
 		<>
-			<h2>Recipes list</h2>
 			<ul className='recipe-list'>
 				{page404}
 				{list}

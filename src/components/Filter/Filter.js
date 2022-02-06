@@ -27,7 +27,11 @@ const Filter = () => {
 			<button
 				key={button.name}
 				type='button'
-				style={activeBtn === index ? { backgroundColor: 'grey' } : { backgroundColor: 'blue' }}
+				style={activeBtn === index ? {
+					backgroundImage: 'linear-gradient(45deg, #6ab1d7 0%, #000 50%, #002878 100%)',
+					backgroundPosition: '100% 0',
+					backgroundSize: ' 200% 200%'
+				} : {}}
 				// className={`btn ${activeBtn}`}
 				onClick={() => showRecipeList(button.name, index)}
 			>
@@ -38,8 +42,8 @@ const Filter = () => {
 
 	const recipes = recipeList ? <RecipeList recipeType={recipeType} /> : null
 	return (
-		<div className='filter mb-2'>
-			<span>Click the following button to find recipes</span>
+		<div className='filter'>
+			<span className='filter-text'>Click the following button to find recipes</span>
 			<div className='filter-buttons'>
 				{buttons}
 			</div>

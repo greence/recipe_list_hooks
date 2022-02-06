@@ -1,14 +1,17 @@
 li{list-style: none;}
+
 .container{
 	display: flex;
 	justify-content:space-evenly;
 	height: 500px;
 	
 }
+
 .left-column{
 	width: 310px;
 	align-self: center;
 }
+
 .right-column{
 	display: flex;
 	flex-wrap: wrap;
@@ -16,6 +19,12 @@ li{list-style: none;}
 	align-self: center;
 }
 
-.btn{
+.right-column-description{
+	font-weight: 600;
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.btn {
 	margin: 0 auto;
 }

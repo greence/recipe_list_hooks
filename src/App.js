@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Header from './components/Header/Header'
-import Search from './components/Search/Search'
+// import Search from './components/Search/Search'
 import Filter from './components/Filter/Filter'
-// import RecipeList from './components/RecipeList/RecipeList'
 import RandomRecipe from './components/RandomRecipe/RandomRecipe'
 import Page404 from './components/Page404/Page404'
 
@@ -17,10 +16,9 @@ const App = () => {
         <Route exact path='/'>
           <div className="App">
             <Header />
-            <Search />
-            <Filter />
+            {/* <Search /> */}
             <RandomRecipe />
-            {/* <RecipeList /> */}
+            <Filter />
           </div>
         </Route>
         <Route>

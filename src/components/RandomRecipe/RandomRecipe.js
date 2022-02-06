@@ -53,8 +53,8 @@ const RandomRecipe = () => {
 					{error404}
 				</div>
 				<div className="right-column">
-					<p>Click the button to get a random recipe!</p>
-					<button className="btn btn-primary" onClick={updateNewRecipe}>Get random recipe</button>
+					<p className="right-column-description">Click the button to get a random recipe</p>
+					<button className="btn" onClick={updateNewRecipe}>Click me!</button>
 				</div>
 			</div>
 		</>

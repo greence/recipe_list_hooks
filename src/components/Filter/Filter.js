@@ -32,7 +32,6 @@ const Filter = () => {
 					backgroundPosition: '100% 0',
 					backgroundSize: ' 200% 200%'
 				} : {}}
-				// className={`btn ${activeBtn}`}
 				onClick={() => showRecipeList(button.name, index)}
 			>
 				{button.label}

@@ -4,9 +4,7 @@ import RecipeListItem from "../RecipeListItem/RecipeListItem"
 import Spinner from "../Spinner/Spinner"
 import Page404 from "../Page404/Page404"
 import id from "../../id.json"
-
 import './RandomRecipe.scss'
-
 
 const RandomRecipe = () => {
 	const [recipe, setRecipe] = useState({})

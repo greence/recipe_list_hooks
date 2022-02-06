@@ -1,4 +1,4 @@
-import errorImg from '../../assets/3818850.jpg'
+import errorImg from '../../assets/error.jpg'
 import './Page404.scss'
 const Page404 = () => {
 	return (

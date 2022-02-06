@@ -34,7 +34,6 @@ const RecipeList = props => {
 		setPrevProps(props.recipeType)
 	}
 
-	// const btn = recipesEnded ? 'btn btn-primary disabled' : 'btn btn-primary'
 	const spinner = loading ? <Spinner /> : null
 	const page404 = error ? <Page404 /> : null
 	const list = prevProps === props.recipeType
@@ -47,9 +46,6 @@ const RecipeList = props => {
 				homepage={recipe.homepage}
 			/>)
 		: null
-
-
-
 
 	return (
 		<>

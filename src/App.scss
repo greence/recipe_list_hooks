@@ -14,7 +14,7 @@ a:focus,a:active{outline: none;}
 nav,footer,header,aside{display: block;}
 
 html,body{
-	background: no-repeat url('./assets/photo-1549483532-d1945e6c48af\ копия.jpg');
+	background: no-repeat url('./assets/backgroung-img.jpg');
 	backdrop-filter: blur(45px);
 	min-height: 100%;
 	width: 100%;
@@ -54,7 +54,7 @@ button {
 	font-size: 16px;
 	font-weight: 400;
 	color: white;
-	box-shadow: 0 16px 32px 0 rgba(0, 40, 120, .35);
+	box-shadow: 0 5px 10px 0 rgba(0, 40, 120, .35);
 	transition: .5s;
 	&:hover{
 		box-shadow: 0 0 0 0 rgba(0, 40, 120, 0);
